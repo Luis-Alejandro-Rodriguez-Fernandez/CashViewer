@@ -1,0 +1,14 @@
+   .loading {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(82, 82, 82, 0.9);
+  }
+
+  .loading svg {
+    max-height: 90%;
+  }
