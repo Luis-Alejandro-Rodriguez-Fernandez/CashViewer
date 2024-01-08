@@ -8,4 +8,10 @@ const authErrores = {
   password_missmatch: "Las contraseñas no coinciden",
 };
 
-export { authErrores };
+const goalErrors = {
+  name_required: "El nombre es obligatorio.",
+  description_required: "La descripción es obligatoria.",
+  goal_required: "La cantidad objetivo es obligatoria.",
+};
+
+export { authErrores, goalErrors };

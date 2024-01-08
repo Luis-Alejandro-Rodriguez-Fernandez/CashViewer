@@ -1,5 +1,4 @@
 import { CircularProgress } from 'react-cssfx-loading'
-import '../css/loading.css'
 
 export default function Loading({ state = false}) {
 

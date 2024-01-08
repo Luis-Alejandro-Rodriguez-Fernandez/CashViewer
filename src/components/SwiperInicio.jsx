@@ -1,46 +1,74 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import { Component } from 'react';
+import { Pagination } from 'swiper/modules';
+import { useEffect } from 'react';
+import clienteAxios from '../config/axios';
+import { useState } from 'react';
+import { formatearDinero } from '../helpers/currency';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import useApp from '../hooks/useApp';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'react-circular-progressbar/dist/styles.css'
+import { CircularProgress } from 'react-cssfx-loading';
 
-class SwiperInicio extends Component {
-    constructor(props) {
-        super(props);
+export default function SwiperInicio({ children }) {
 
-    }
+  const { obtenerObjetivos, objetivos, loadingObjetos } = useApp();
 
-    render() {
-        return (
-                  <Swiper            
-                  breakpoints={{
-                    640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
-                    },
-                    1024: {
-                      slidesPerView: 3,
-                      spaceBetween: 10,
-                    },
-                  }} 
-                  navigation={true} modules={[Navigation]} className="mySwiper">
-                  <SwiperSlide className='flex items-center justify-center'>Slide 1</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 2</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 3</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 4</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 5</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 6</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 7</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 8</SwiperSlide>
-                  <SwiperSlide className='flex items-center justify-center'>Slide 9</SwiperSlide>
-                </Swiper>
-        )
-    }
+  useEffect(() => {
+    obtenerObjetivos();
+  }, []);
+
+  if (loadingObjetos) {
+    return (
+      <div className="overflow-hidden">
+        <CircularProgress className="" color="#69a018" height="100px" width="100px" />
+      </div>
+    );
+  }
+
+  return (
+    <Swiper
+      slidesPerView={objetivos.length > 3 ? 3 : objetivos.length}
+      spaceBetween={20}
+      grabCursor={true}
+      pagination={{
+        clickable: true,
+      }}
+      modules={[Pagination]}
+      className="mySwiper">
+      {objetivos.length > 0
+        ? objetivos.map(objetivo => {
+          return <SwiperSlide
+            key={objetivo.id}
+            className='box shadow-md border-solid border-slate-200 border-2 curved-box p-1 cursor-pointer'>
+            <h3 className='font-bold text-center my-3 text-xl'>{objetivo.name}</h3>
+
+            <table className='w-full'>
+              <thead>
+                <tr className='w-auto'>
+                  <th className='text-gray-500 font-semibold underline text-center'>Saldo</th>
+                  <th className='text-gray-500 font-semibold underline text-center'>Meta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className='text-center font-semibold text-md'>{formatearDinero(objetivo.saldo)}</td>
+                  <td className='text-center font-semibold text-md'>{formatearDinero(objetivo.objetivo)}</td>
+                </tr>
+              </tbody>
+            </table>
+            <CircularProgressbar
+              className="h-20 mt-1"
+              value={objetivo.progreso}
+              text={`${objetivo.progreso}%`}
+            />
+          </SwiperSlide>
+        })
+        : "Todavia no has creado ningún objetivo"
+      }
+    </Swiper>
+  )
+
 }
-
-export default SwiperInicio;

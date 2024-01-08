@@ -1,34 +1,31 @@
 import React, { Component } from "react";
 
-class SimpleCard extends Component {
-    constructor(props) {
-        super(props);
+export default function SimpleCard(props) {
 
-        this.title = props.title ?? 'Titulo';
-        this.subtitle = props.subtitle ?? 'Subititulo';
-        this.color = props.color ?? "#FFFFFF";
-        this.fontColor = props.fontColor ?? "#000000";
-        this.done = props.done ?? 0;
-        this.componentClasses = props.componentClasses ?? "flex justify-center items-center w-full";
-        this.containerClasses = props.containerClasses ?? "curved-box ";
-        this.dataClasses = props.dataClasses ?? "curved-box ";
-        this.data = props.data ?? null;
 
-    }
+    let title = props.title ?? 'Titulo';
+    let subtitle = props.subtitle ?? 'Subititulo';
+    let color = props.color ?? "#FFFFFF";
+    let fontColor = props.fontColor ?? "#000000";
+    let done = props.done ?? 0;
+    let componentClasses = props.componentClasses ?? "flex justify-center items-center w-full";
+    let containerClasses = props.containerClasses ?? "curved-box ";
+    let titleClasses = props.titleClasses ?? "font-bold text-2xl";
+    let subtitleClasses = props.subtitleClasses ?? "text-xs";
+    let dataContainerClasses = props.dataClasses ?? "";
+    let dataClasses = props.dataClasses ?? "";
+    let data = props.data ?? null;
 
-    render() {
-        return (
-        <div className={this.componentClasses}>
-            <div className={this.containerClasses} style={{backgroundColor: this.color, color: this.fontColor}}>
-                <h2 className="font-bold text-2xl">{this.title}</h2>
-                <h5 className="text-xs">{this.subtitle}</h5>
-                <div>
-                    <span className="">{this.data}</span>
+    return (
+        <div className={componentClasses}>
+            <div className={containerClasses} style={{ backgroundColor: color, color: fontColor }}>
+                <h2 className={titleClasses}>{title}</h2>
+                <h5 className={subtitleClasses}>{subtitle}</h5>
+                <div className={dataContainerClasses}>
+                    <span className={dataClasses}>{data}</span>
                 </div>
             </div>
         </div>
-        )
-    }
-}
+    )
 
-export default SimpleCard;
+}

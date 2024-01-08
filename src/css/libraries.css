@@ -1,0 +1,39 @@
+/* Modal React*/
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+
+/* Estilos para el contenido del modal */
+.ReactModal__Content {
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .ReactModal__Content--after-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .ReactModal__Content--before-close {
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+/* Swiper*/
+
+.swiper {
+    z-index: 0 !important;
+  }
+
+  

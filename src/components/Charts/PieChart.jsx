@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
+import { formatearDinero } from "../../helpers/currency";
 
-class PieChart extends Component {
-  constructor(props) {
-    super(props);
+export default function PieChart(props) {
 
-    this.state = {
-        series: [44, 55, 13, 43, 22],
+    let state = {
+        series:  props.series,
         options: {
           chart: {
             width: 380,
             type: 'pie',
           },
-          labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+          labels: props.labels,
           responsive: [{
             breakpoint: 480,
             options: {
@@ -23,26 +22,28 @@ class PieChart extends Component {
                 position: 'bottom'
               }
             }
-          }]
+          }],
+          yaxis: {
+            labels: {
+                formatter: (value) => {
+                  return formatearDinero(value);
+                }
+              }
+            }
         },
       
       
       };
 
-  }
-
-  render() {
     return (
       <div>
         <Chart
-          options={this.state.options}
-          series={this.state.series}
+          options={state.options}
+          series={state.series}
           type="pie"
           height="350"
         />
       </div>
     );
-  }
-}
 
-export default PieChart;
+}

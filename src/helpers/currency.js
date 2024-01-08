@@ -4,7 +4,3 @@ export const formatearDinero = (cantidad) => {
     currency: "EUR",
   });
 };
-
-export const limitText = (text) => {
-  return text.length >= 30 ? text.slice(0, 30) + "..." : text;
-};

@@ -28,7 +28,7 @@ footer {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 999999 !important; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
     background-color: #111; /* Black*/
@@ -70,11 +70,32 @@ footer {
     border-radius: 10px;
   }
 
-  .test {
-    display: flex;
-    align-items: center;
-  }
-
   .element {
     margin: 0 auto;
+  }
+
+  .text-green {
+    color: #69a018 !important;
+  }
+
+  .text-red {
+    color: #ef4444 !important;
+  }
+
+  .m-oauto {
+    margin: 0 auto;
+  }
+
+  .md-modal {
+    min-width: 50vw !important;
+    height: 60vh !important;
+  }
+
+  .md-modal-content {
+    min-width: 50vw !important;
+    height: 50vh !important;
+  }
+
+  .tab-active {
+    border-bottom: solid 2px #69a018;
   }

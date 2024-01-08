@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import clienteAxios from "../config/axios";
-import useApp from "./useApp";
 
 export const useAuth = ({ middleware, url }) => {
   const token = localStorage.getItem("AUTH_TOKEN");
@@ -19,6 +18,7 @@ export const useAuth = ({ middleware, url }) => {
 
       if (authOK && data.user !== null) {
         sessionStorage.setItem("user", JSON.stringify(data.user));
+        setUserSession(data.user);
       }
     } catch (error) {
       setErrores(Object.values(error));
@@ -47,6 +47,7 @@ export const useAuth = ({ middleware, url }) => {
 
       localStorage.removeItem("AUTH_TOKEN");
       sessionStorage.removeItem("user");
+      setUserSession({});
 
       navigate("/auth/login");
     } catch (error) {
